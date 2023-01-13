@@ -1,0 +1,103 @@
+<app-navbar></app-navbar>
+<div class="page-wrapper chiller-theme toggled">
+      <a id="show-sidebar" class="btn btn-sm btn-success">
+          <i class="fas fa-bars"></i>
+      </a>
+      <nav id="sidebar" class="sidebar-wrapper bg-dark">
+          <div class="sidebar-content">
+              <div class="sidebar-brand">
+                  <a>Menu</a>
+                  <div id="close-sidebar">
+                      <i class="fas fa-times"></i>
+                  </div>
+              </div>
+              <div class="sidebar-header">
+                  <div class="user-info">
+                      <span class="user-role">Administrador</span>
+                      <span class="user-status">
+                          <i class="fa fa-circle"></i>
+                          <span>Online</span>
+                      </span>
+                  </div>
+              </div>
+              <div class="sidebar-menu">
+                  <ul>
+                      <li class="header-menu">
+                          <span>General</span>
+                      </li>
+                      <li class="sidebar-dropdown">
+                          <a>
+                              <i class="fa fa-gear"></i>
+                              <span>Administracion</span>
+                          </a>
+                          <div class="sidebar-submenu">
+                              <ul>
+                                  <li>
+                                      <a [routerLink]="['bus']" >Autobuses</a>
+                                  </li>
+                                  <li>
+                                    <a [routerLink]="['terminal']" >Terminales</a>
+                                </li>
+                              </ul>
+                          </div>
+                      </li>
+                      <li class="sidebar-dropdown">
+                          <a>
+                              <i class="fa fa-chart-line"></i>
+                              <span>Reportes</span>
+                              <span class="badge badge-pill badge-primary">10</span>
+                          </a>
+                          <div class="sidebar-submenu">
+                              <ul>
+                                  <li>
+                                      <a [routerLink]="['tickets']">Reportes de ventas
+
+                                      </a>
+                                  </li>
+                                  
+                              </ul>
+                          </div>
+                      </li>
+                      <li class="sidebar-dropdown">
+                          <a>
+                              <i class="far fa-user"></i>
+                              <span>Mi cuenta</span>
+                          </a>
+                          <div class="sidebar-submenu">
+                              <ul>
+                                  <li>
+                                      <a [routerLink]="['personal']" >General</a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </li>
+                      <li class="header-menu">
+                          <span>Extra</span>
+                      </li>
+                      <li>
+                          <a href="#">
+                              <i class="fa fa-book"></i>
+                              <span>Documentación</span>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+              <!-- sidebar-menu  -->
+          </div>
+          <!-- sidebar-content  -->
+          <div class="sidebar-footer">
+              <a [routerLink]="['/home']">
+                  <i class="fa fa-home"></i>
+              </a>
+              <a href="#">
+                  <i class="fa fa-power-off"></i>
+              </a>
+          </div>
+      </nav>
+      <main class="page-content">
+        <div class="container-fluid">
+            <router-outlet></router-outlet>
+        </div>
+      </main>
+</div>
+<app-footer></app-footer>

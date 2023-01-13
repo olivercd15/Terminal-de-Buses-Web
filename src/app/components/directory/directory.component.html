@@ -1,0 +1,47 @@
+<app-navbar></app-navbar>
+<div class="container">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active"  style="height: 700px; width: 1200px; margin: 0  auto; ">
+                <img src="assets/images/paisaje1.jpg" alt="First slide">
+                <div class="carousel-caption d-none d-md-block">
+                </div>
+              </div>
+              <div class="carousel-item" style="height: 700px; width: 1200px; margin: 0  auto;">
+                <img src="assets/images/paisaje2.jpg" alt="Second slide">
+                <div class="carousel-caption d-none d-md-block">
+               </div>
+              </div>
+              <div class="carousel-item" style="height: 700px; width: 1200px; margin: 0  auto;">
+                <img src="assets/images/paisaje3.jpg" alt="Third slide">
+                <div class="carousel-caption d-none d-md-block">
+                </div>
+              </div>
+            </div>
+          </div>
+      <div class="jumbotron p-1 p-md-2 text-white rounded " style="background: #343a40;" >
+        <div class="col-md-6 px-25" style="width: 3000px; height:75px;" >
+          <h3 class="display-4" >SECCIÓN DE BUSES</h3>
+        </div>
+      </div>
+    <div class="card-columns">
+      <div class="card col-sm-12" style="border-color: #343a40; border-width: thick;" *ngFor="let term of terminals">
+        <div class="card-body  row">
+          <h4 class="card-title text-dark-50 col-sm-12">{{term["name"]}}</h4>
+          <h6 class="card-text text-dark-50 col-sm-12">{{term["address"]}}</h6>
+          <h6 class="card-text text-dark-50 col-sm-12">{{term["tel"]}}</h6>
+          <h6 class="card-text text-dark-50 col-sm-12">{{term["zip"]}}</h6>
+          <h6 class="card-text text-dark-50 col-sm-12">{{term["state"]}}</h6>
+        </div>      
+      </div>
+        </div>
+        <!-- <nav aria-label="Page navigation example" class="">
+        <pagination [totalItems]="this.total" [itemsPerPage]="6"[(ngModel)]="curpag"(pageChanged)="pageChanged($event)"></pagination>
+        </nav> -->
+    </div>
+    <app-footer></app-footer>

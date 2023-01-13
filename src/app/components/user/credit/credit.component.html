@@ -1,0 +1,76 @@
+<div class="row" style="margin-top:2%; border-radius: 10px; margin-bottom: 2%;">
+  <div id="area" class="col-md-3" *ngFor="let card of cards; let i = index">
+    <div class="master-card ">
+      <div class="card" (click) = "this.editFlag[i] = !this.editFlag[i]">
+        <div class="title">Tarjeta de {{card["type"]}}</div>
+        <div class="input-number"><span class="title-number">Numeros de tarjeta</span>
+          <div class="inputs-number">
+              <input type="text" maxlength="4" name="number-card" [placeholder]="getNumbers(card['number'],0,4)" disabled/>
+              <input type="text" maxlength="4" name="number-card" [placeholder]="getNumbers(card['number'],5,9)" disabled/>
+              <input type="text" maxlength="4" name="number-card" [placeholder]="getNumbers(card['number'],10,14)" disabled/>
+              <input type="text" maxlength="4" name="number-card" [placeholder]="getNumbers(card['number'],15,19)" disabled/>
+          </div>
+          <div class="selects-date selecters">
+            <div class="day-select"><span>Dia</span>
+              <select id="dates">
+                <option selected>{{getNumbers(card["date"],0,2)}}</option>
+              </select>
+            </div>
+            <div class="year-select"><span>Año</span>
+              <select id="dates">
+                <option selected>{{getNumbers(card["date"],3,5)}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="mark-gold">
+            <div class="round">
+              <div class="circles">
+                <div class="circle-1"></div>
+                <div class="circle-2" *ngIf="card['company']=='MasterCard'"></div>
+                <div class="circle-3" *ngIf="card['company']=='Visa'"></div>
+              </div>
+            </div>
+        </div>
+        <div class="name" style="margin-top:5px;"><span>{{card["owner"]}}</span></div>
+      </div>
+      <div class="card-back">
+        <div class="tire"></div>
+        <div class="secret-area">
+          <input type="text" name="number-card" placeholder="XXXX" disabled />
+        </div>
+        <div class="chip-card"></div>
+      </div>
+    </div> 
+    <div class="button-sent row" *ngIf="this.editFlag[i] == true">
+        <button class="btn btn-success col-md-12" style="margin-bottom: 3%;" (click)="toggledetails(card['id'])">Detalles</button>
+        <button class="btn btn-danger col-md-12"  (click)="delete(card['id'])">Eliminar</button>
+    </div>
+  </div>
+</div>
+<div class="row">
+    <div class="col-md-3 button-sent">
+        <button id="continue" class="btn btn-success col-md-12" [disabled]="!this.blockButton" (click)="this.blockButton=false" style="margin-bottom:1%;">Atras</button>
+    </div>
+    <div class="col-md-3 button-sent">
+        <button id="back" class="btn btn-success col-md-12" [disabled]="this.blockButton" (click)="this.blockButton=true" style="margin-bottom:1%;">Adelante</button>
+    </div>
+    <div class="col-md-3 button-sent">
+        <button class="btn btn-info col-md-12" (click)="toggleNew()">Agregar Tarjeta</button>
+    </div>
+</div>
+
+<div class="jumbotron bg-dark" *ngIf="details">
+  <p class="lead" style="color: #fff;">Detalles de la tarjeta</p>
+  <hr class="my-4 bg-white" >
+  <div *ngFor="let item of report; let i = index">
+    <label style="color:#fff;">Mensaje: </label>
+    <strong style="color:#fff;">{{item["message"]}}</strong><br>
+    <label class="lead" style="color: #fff;">Fecha: </label>
+    <strong style="color: #fff;">{{item["date"]}}</strong><br>
+    <label class="lead" style="color: #fff;">Hora: </label>
+    <strong style="color: #fff;">{{item["time"]}}</strong>
+    <hr class="my-4 bg-white" >
+  </div>
+</div>
+<app-edit-card *ngIf="addnew"></app-edit-card>

@@ -1,0 +1,74 @@
+<body class="my-login-page">
+      <div class="container h-100">
+        <div class="row justify-content-md-center h-100">
+          <div style="width: 400px; margin-top:10%; " >
+            <div class="card fat" style="background: rgba(39, 39, 44, 0.705);color:#fff;">
+              <div class="card-body">
+                <img src="assets/images/user.png" class="user">
+                <h4 class="card-title">Ingresar</h4>
+                <form  
+                      (ngSubmit)="login(loginForm)" 
+                      #loginForm="ngForm" 
+                      autocomplete="on">
+                  <fieldset>
+                    <div class="form-group">
+                      <label for="email">Correo Electronico</label>
+                      <input id="email" 
+                          type="email" 
+                          class="form-control"  
+                          placeholder="e-mail" 
+                          required 
+                          ngModel 
+                          name="userName" 
+                          #userNameVar="ngModel" 
+                         
+                          autofocus>
+                      <span class="invalid-feedback">
+                        <span *ngIf="userNameVar.errors?.required">
+                          Correo requerido.
+                        </span>
+                      </span>
+                    </div>
+                  <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input id="password"
+                           type="password" 
+                           class="form-control" 
+                           name="password" 
+                           placeholder="Contraseña"
+                           required
+                           ngModel
+                           #passwordVar="ngModel"
+                           [ngClass]="{'is-invalid': (passwordVar.touched || passwordVar.dirty) && !passwordVar.valid }"
+                           data-eye>
+                    <span class="invalid-feedback">
+                      <span *ngIf="passwordVar.errors?.required">
+                        Contraseña requerida
+                      </span>
+                    </span>
+                  </div>
+                  <div class="form-group no-margin">
+                    <button type="submit" 
+                            class="btn btn-success btn-block"
+                            [disabled]="!loginForm.valid">
+                      Ingresar
+                    </button>
+                  </div>
+                  <div class="form-group no-margin">
+                    <button type="button"
+                            class="btn btn-primary btn-block"
+                            (click)="cancel()">Cancelar
+
+                    </button>
+                  </div>
+                  </fieldset>
+                  
+                  <div class="margin-top20 text-center">¿Aun no tienes una cuenta? <a [routerLink]="['/register']">Crea una</a></div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-footer></app-footer>
+</body>

@@ -1,0 +1,100 @@
+<form class="jumbotron bg-dark" style="margin-top:2%;" (ngSubmit)="addCard(cardform)" #cardform="ngForm">
+  <p class="lead" style="color: #fff;">Nueva tarjeta</p>
+  <hr class="my-4 bg-white" >
+  <div class="form-row">
+    <div class="col-md-9">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Nombre del titular</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Titular" [(ngModel)]="name" name="name">
+      </div>
+    </div>
+  </div>
+  <hr class="my-4 bg-white">
+  <div class="form-row">
+    <div class="col-md-7">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Numero de tarjeta</span>
+        </div>
+        <input type="text" maxlength="19" [(ngModel)]="cardnum" name="cardnum"
+        class="form-control"
+        placeholder="XXXX-XXXX-XXXX-XXXX"
+        (keydown)="format($event)">
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Codigo</span>
+        </div>
+        <input 
+        type="text" 
+        maxlength="4"
+        class="form-control"
+        placeholder="XXXX"
+        [(ngModel)]="cvc"
+        name="cvc">
+      </div>
+    </div>
+  </div>
+  <hr class="my-4 bg-white">
+<div class="form-row">
+  <div class="col-md-6">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Compañia</span>
+        </div>
+        <select name="company" [(ngModel)]="company" class="form-control">
+            <option value="MasterCard">MasterCard</option>
+            <option value="Visa">Visa</option>
+        </select>
+      </div>
+  </div>
+  <div class="col-md-3">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Tipo</span>
+      </div>
+      <select name="type" [(ngModel)]="type" class="form-control">
+          <option value=1>Credito</option>
+          <option value=0>Debito</option>
+      </select>
+    </div>
+  </div>
+</div>
+  <hr class="my-4 bg-white">
+  <p class="lead" style="color: #fff;">Fecha de expiracion</p>
+  <div class="form-row">
+    <div class="col-md-2">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Mes</span>
+        </div>
+        <input type="text" placeholder="MM" [(ngModel)]="expmonth" name="expmonth" class="form-control" maxlength="2">
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Año</span>
+        </div>
+      <input type="text" name="expyear" placeholder="YYYY" class="form-control" maxlength="4" [(ngModel)]="expyear">
+    </div>
+  </div>
+</div>
+  <hr class="my-4 bg-white">
+  <button 
+    type="submit"  
+    class="btn btn-success col-md-4"
+    [disabled]="!cardform.valid">
+      Guardar tarjeta
+  </button>
+</form>
+<div class="alert alert-success" role="alert" *ngIf="alert"alert-dismissible>
+  <strong>Tarjeta agregada</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

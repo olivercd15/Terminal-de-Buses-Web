@@ -1,0 +1,123 @@
+
+<form class="jumbotron bg-dark" style="margin-top:2%;" 
+    (ngSubmit)="checkPass()"
+    #dataForm="ngForm"
+    autocomplete="on">
+    <h1 class="display-4" style="color:#fff;">Bienvenido, {{userName}}!</h1>
+    <p class="lead" style="color:#fff;">Información Personal</p>
+    <hr class="my-4 bg-white">
+    <p class="lead" style="color:#fff;">Nombre completo</p>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+          <input 
+            type="text" 
+            class="form-control font-italic" 
+            name="adminName"
+            [(ngModel)]="adminName"
+            [disabled]="this.flag" 
+            [placeholder]="this.adminName">
+        </div>
+        <div class="form-group col-md-3">
+            <input type="text"
+             class="form-control font-italic" 
+             id="" 
+             [disabled]="this.flag" 
+             [placeholder]="this.last_name1"
+             [(ngModel)]="last_name1"
+             name="last_name1">
+          </div>
+        <div class="form-group col-md-3">
+              <input type="text" 
+              class="form-control font-italic" 
+              id="" 
+              [disabled]="this.flag" 
+              [placeholder]="this.last_name2"
+              [(ngModel)]="last_name2"
+              name="last_name2">
+        </div>
+        <div class="form-group col-md-2">
+            <button type="button" class="btn btn-outline-success" (click)="this.flag = !this.flag">Editar</button>
+        </div>
+    </div>
+    <hr class="my-4 bg-white">
+    <p class="lead" style="color:#fff;">Carnet de Identidad y Correo Electronico</p>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <input type="text" 
+            class="form-control font-italic" 
+            id="" 
+            [disabled]="this.flag2" 
+            [placeholder]="this.rfc"
+            [(ngModel)]="rfc"
+            name="rfc">
+          </div>
+          <div class="form-group col-md-2">
+              <button type="button" class="btn btn-outline-success" (click)="this.flag2 = !this.flag2">Editar</button>
+          </div>
+          <div class="form-group col-md-4">
+              <input type="text" 
+              class="form-control font-italic" 
+              id="" 
+              [disabled]="this.flag3" 
+              [placeholder]="this.email"
+              [(ngModel)]="email"
+              name="email">
+            </div>
+            <div class="form-group col-md-2">
+                <button type="button" class="btn btn-outline-success" (click)="this.flag3 = !this.flag3" >Editar</button>
+            </div>
+      </div>
+      <hr class="my-4 bg-white">
+      <p class="lead" style="color:#fff;">Telefono</p>
+      <div class="form-row">
+          <div class="form-group col-md-4">
+              <input type="text" 
+              class="form-control font-italic" 
+              id="" 
+              [disabled]="this.flag4" 
+              [placeholder]="this.cel"
+              [(ngModel)]="cel"
+              name="cel">
+            </div>
+            <div class="form-group col-md-2">
+                <button type="button" class="btn btn-outline-success" (click)="this.flag4 = !this.flag4">Editar</button>
+            </div>
+        </div>
+        <hr class="my-4 bg-white">
+        <div class="form-row">
+            <button type="button" class="btn btn-outline-dark col-md-4" (click)="togglePass()">Cambiar Contraseña</button>
+        </div>
+        <div *ngIf="changepass">
+            <p class="lead"></p>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                  <input type="password" class="form-control font-italic" id="curpass"  placeholder="Contraseña Actual"
+                 [(ngModel)]="curpass"
+                 name="curpass">
+                  
+                </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-md-4">
+                  <input type="password" class="form-control font-italic" id="newpass" placeholder="Nueva Contraseña"
+                  [(ngModel)]="newpass"
+                  name="newpass">
+                </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-md-4">
+                  <input type="password" class="form-control font-italic" id="confpass" placeholder="Verificar Contraseña"
+                  [(ngModel)]="confpass"
+                  name="confpass"
+                  (change)="confPass()">
+                </div>
+                <i *ngIf="confPass()" class="fa fa-check text-success"  style="font-size:30px;"></i>
+          </div>
+        </div>
+        <hr class="my-4">
+            <button 
+                type="submit"  
+                class="btn btn-success col-md-4">
+                Guardar Cambios
+            </button>
+</form>

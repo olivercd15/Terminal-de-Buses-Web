@@ -1,0 +1,79 @@
+<app-navbar></app-navbar>
+<form class="jumbotron bg-dark" novalidate style="margin-top:2%;"(ngSubmit)="search(searchform)" #searchform="ngForm" *ngIf="!search_valid">
+  <!-- <div class="progress" style="height: 40px; margin-bottom: 1%;">
+          <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="Busqueda" aria-valuemin="0" aria-valuemax="100">Busqueda</div>
+  </div> -->
+  <div class="row">
+          <div class="col-md-11">
+                  <p class="lead" style="color: #fff;">Selecciona la ruta deseada</p>
+                  <hr class="my-4 bg-white">
+          </div>
+  </div>
+  <div class="form-row">
+                          <div class="col-md-6">
+                                  <div class="input-group mb-3">
+                                                  <div class="input-group-prepend">
+                                                          <span class="input-group-text">Origen</span>
+                                                  </div>
+                                                  <select class="form-control" required [(ngModel)]="origin" name="origin" (change)="checkDest()">
+                                                          <option [ngValue]="x" *ngFor="let x of terminals">
+                                                                  {{x["name"]}},{{x["city"]}} {{x["state"]}}
+                                                          </option>
+                                                  </select>
+                                  </div>
+                          </div>
+                          <div class="col-md-6">
+                                  <div class="input-group mb-3">
+                                          <div class="input-group-prepend">
+                                                  <span class="input-group-text">Destino</span>
+                                          </div>
+                                          <select  class="form-control" [disabled]="this.origsel==false" required [(ngModel)]="destination" name="destination">
+                                                  <option [ngValue]="y" *ngFor="let y of destinations">
+                                                          {{y["name"]}},{{y["city"]}} {{y["state"]}} 
+                                                  </option>
+                                          </select>
+                                  </div>
+                          </div>
+  </div>
+                  <div class="form-row justify-content-around">
+                          <button type="submit" 
+                                  class="btn btn-success"
+                                  [disabled]="!searchform.valid">
+                                  Continuar
+                          </button>
+                  </div>
+</form>
+<div class="jumbotron bg-dark" style="margin-top:2%;" *ngIf="search_valid">
+  <div class="progress" style="height: 40px; margin-bottom: 1%;">
+          <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="Resultados" aria-valuemin="0" aria-valuemax="100">Resultados</div>
+  </div>
+  <div class="row">
+          <div class="col-md-11">
+                  <p class="lead" style="color: #fff;">{{origin.name}} - {{destination.name}}</p>
+          </div>
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col"  style="color: #fff;">Horario</th>
+                  <th scope="col"  style="color: #fff;">Costo</th>
+                  <th scope="col"  style="color: #fff;">Tipo de Bus</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let x of times">
+                  <td  style="color: #fff;">{{x.time}}</td>
+                  <td  style="color: #fff;"> Bs. {{x.cost}}</td>
+                  <td  style="color: #fff;">{{x.tipoBus}}</td>
+                </tr>
+              </tbody>
+            </table>
+  </div>
+  <div class="row">
+      <button  
+      class="btn btn-info"
+      (click)="nueva()">
+      Nueva Busqueda
+      </button>
+  </div>
+</div>
+<app-footer></app-footer>

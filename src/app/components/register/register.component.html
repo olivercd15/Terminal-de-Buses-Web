@@ -1,0 +1,101 @@
+<app-navbar></app-navbar>
+  <body class="container border" style="width:60%; margin-top:5%; margin-bottom: 5%;">
+    <form 
+          (ngSubmit)="register(registerForm)"
+          #registerForm="ngForm"
+          style="margin-bottom:2%;">
+      <h2 class="text-muted">Crea una cuenta</h2>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <input 
+          type="text" 
+          class="form-control" 
+          id="name" 
+          placeholder="Nombre" 
+          required
+          name="first_name"
+          ngModel
+          #NameVar="ngModel">
+        </div>
+        <div class="form-group col-md-3">
+          <input 
+          type="text" 
+          class="form-control" 
+          id="last_name1" 
+          placeholder="Apellido paterno" 
+          required
+          name="last_name_p"
+          ngModel
+          #LastNamePVar="ngModel">
+        </div>
+        <div class="form-group col-md-3">
+          <input 
+          type="text" 
+          class="form-control" 
+          id="last_name2" 
+          placeholder="Apellido materno" 
+          required
+          name="last_name_m"
+          ngModel
+          #LastNameMVar="ngModel">
+        </div>
+      </div>
+      <div class="form-group">
+        <input 
+        type="email" 
+        class="form-control" 
+        id="email" 
+        placeholder="Correo electronico" 
+        required
+        name="email"
+        ngModel
+        #EmailVar="ngModel">
+        <div class="invalid-feedback">Formato de correo invalido</div>
+      </div>
+      <div class="form-group">
+          <input 
+          type="password" 
+          class="form-control" 
+          id="password" 
+          placeholder="Contraseña" 
+          required
+          name="password"
+          ngModel
+          #PassVar="ngModel">
+      </div>
+      <div class="row">
+        <div class="form-group col-lg-6">
+            <input 
+            type="text" 
+            class="form-control" 
+            id="cellphone" 
+            placeholder="Telefono" 
+            required
+            name="tel"
+            ngModel
+            #TelVar="ngModel">
+        </div>
+        <div class="form-group col-lg-6">
+            <input 
+            type="text" 
+            class="form-control" 
+            id="rfc" 
+            placeholder="rfc" 
+            required
+            name="rfc"
+            ngModel
+            #RfcVar="ngModel">
+        </div>
+      </div>     
+      <div class="form-row">
+            <div class="col-md-6">
+              <button type="reset" class="btn btn-dark col-md-12" style="margin-bottom:5%; margin-top:5%;" >Limpiar</button>
+              <button 
+              type="submit" 
+              class="btn btn-dark col-md-12" 
+              [disabled]="!registerForm.valid">Registrate</button>
+            </div>
+        </div>
+  </form>
+</body>
+<app-footer></app-footer>

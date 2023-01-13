@@ -1,0 +1,45 @@
+<div>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" [routerLink]="['/home']">TERMINAL BUS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/home']">Inicio<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/search']">Buscar Viaje</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/directory']">Directorio</a>
+        </li>
+        
+      </ul>
+      <ul class="navbar-nav">
+          <li class='nav-item'
+              *ngIf="isLoggedIn && isAdmin">
+            <a class="nav-link"
+               routerLink='/admin'>Bienvenido {{ userName }}</a>
+          </li>
+          <li class='nav-item'
+              *ngIf="isLoggedIn && !isAdmin">
+            <a class="nav-link"
+               routerLink='/user'>Bienvenido {{ userName }}</a>
+          </li>
+          <li *ngIf="!isLoggedIn">
+            <a class="nav-link" routerLink='/login'>Iniciar Sesion</a>
+          </li>
+          <!-- <li *ngIf="!isLoggedIn">
+              <a class="nav-link" routerLink='/register'>Registrarse</a>
+
+          </li> -->
+          <li  *ngIf="isLoggedIn">
+            <a class="nav-link"
+               routerLink=''(click)="logOut()">Salir</a>
+          </li>
+        </ul>
+    </div>
+  </nav>
+</div>

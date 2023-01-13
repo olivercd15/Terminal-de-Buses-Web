@@ -1,0 +1,68 @@
+  <div class="card" style="margin-top:5%;" *ngFor="let item of purchases;let i=index">
+      <div class="card-header text-center bg-dark">
+          <h5 class="lead" style="color:#fff;">Detalles de compra {{i+1}}</h5>
+        </div>
+        <div class="card-body">
+            <div id="accordion">
+                <div class="card">
+                  <div class="card-header bg-dark" id="headingOne">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Detalles del viaje
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                      <h6>Dia</h6>{{item.fecha}}
+                      <hr class="my-4">
+                      <h6>Hora</h6>{{item.horario}}
+                      <hr class="my-4">
+                      <h6>Origen</h6>{{item.origen}}
+                      <hr class="my-4">
+                      <h6>Destino</h6>{{item.destino}}
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header bg-dark" id="headingTwo">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Detalles de compra
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                        <h6>Folio</h6>{{item.folio}}
+                        <hr class="my-4">
+                        <h6>Sub-Total</h6>{{item.subtotal}}
+                        <hr class="my-4">
+                        <h6>Total</h6>{{item.total}}
+                        <hr class="my-4">
+                        
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="card">
+                  <div class="card-header bg-dark" id="headingThree">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Tarjeta de credito
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="card border-dark" style="width:300px">
+                              <div class="card-body text-dark row">
+                                <h4 class="card-title col-sm-12">{{item.titular}} </h4>
+                                <h6 class="card-text col-sm-12">{{item.numero}}</h6>
+                              </div>
+                        </div> 
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+        </div>
+  </div>

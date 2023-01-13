@@ -1,0 +1,333 @@
+<div id="preloader_1">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+</div>
+<form class="jumbotron bg-dark" novalidate (ngSubmit)="search(searchform)" #searchform="ngForm" *ngIf="!search_valid">
+        <div class="progress" style="height: 40px; margin-bottom: 1%;">
+                <div class="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="Busqueda"
+                        aria-valuemin="0" aria-valuemax="100">Busqueda</div>
+        </div>
+        <div class="row">
+                <div class="col-md-9">
+                        <p class="lead" style="color: #fff;">Selecciona la ruta deseada</p>
+                        <hr class="my-4 bg-white">
+                </div>
+                <div class="col-md-3">
+                        <div *ngIf="searchform.valid">
+                                <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: flex;">
+                                        <div class="swal2-success-circular-line-left"></div>
+                                        <span class="swal2-success-line-tip"></span>
+                                        <span class="swal2-success-line-long"></span>
+                                </div>
+                        </div>
+                </div>
+        </div>
+        <div class="form-row">
+                <div class="col-md-6">
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">Origen</span>
+                                </div>
+                                <select class="form-control" required [(ngModel)]="origin" name="origin"
+                                        (change)="checkDest()">
+                                        <option [ngValue]="x" *ngFor="let x of terminals">
+                                                {{x["name"]}},{{x["city"]}} {{x["state"]}}
+                                        </option>
+                                </select>
+                        </div>
+                </div>
+                <div class="col-md-6">
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">Destino</span>
+                                </div>
+                                <select class="form-control" [disabled]="this.origsel==false" required
+                                        [(ngModel)]="destination" name="destination" (change)="checkHora()">
+                                        <option [ngValue]="y" *ngFor="let y of destinations">
+                                                {{y["name"]}},{{y["city"]}} {{y["state"]}}
+                                        </option>
+                                </select>
+                        </div>
+                </div>
+        </div>
+        <p class="lead" style="color: #fff;">Selecciona el horario deseado</p>
+        <hr class="my-4 bg-white">
+        <div class="form-row">
+                <div class="col-md-6">
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">Horario</span>
+                                </div>
+                                <select class="form-control" [disabled]="!this.destsel" required [(ngModel)]="time"
+                                        name="time">
+                                        <option [ngValue]="z" *ngFor="let z of times">
+                                                {{z["time"]}}, {{z["tipoBus"]}}
+                                        </option>
+                                </select>
+                        </div>
+
+                </div>
+                <div class="col-md-6">
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">Fecha</span>
+                                </div>
+                                <input type="text" placeholder="Escoge una fecha" class="form-control" bsDatepicker
+                                        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD'}" required [(ngModel)]="fecha"
+                                        name="fecha" autocomplete="off">
+                        </div>
+                </div>
+        </div>
+        <hr class="my-4 bg-white">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="search_valid">
+                <strong>Registro completo</strong> Continua en la siguiente pestaña
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+        <div class="form-row justify-content-around">
+                <button type="submit" class="btn btn-success" [disabled]="!searchform.valid">
+                        Continuar
+                </button>
+        </div>
+
+</form>
+<form class="jumbotron bg-dark" *ngIf="search_valid && !select_valid" (ngSubmit)="select(selectForm)"
+        #selectForm="ngForm">
+        <div class="progress" style="height: 40px; margin-bottom: 1%;">
+                <div class="progress-bar" role="progressbar" style="width: 66%;" aria-valuenow="Busqueda"
+                        aria-valuemin="0" aria-valuemax="100">Boletos</div>
+        </div>
+        <div class="row">
+                <div class="col-md-9">
+                        <p class="lead" style="color: #fff;">Seleccione el numero de boletos, la compra se limita a
+                                cinco boletos</p>
+                        <hr class="my-4 bg-white">
+                </div>
+                <div class="col-md-3">
+                        <div *ngIf="selectForm.valid">
+                                <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: flex;">
+                                        <div class="swal2-success-circular-line-left"></div>
+                                        <span class="swal2-success-line-tip"></span>
+                                        <span class="swal2-success-line-long"></span>
+                                </div>
+                        </div>
+                </div>
+        </div>
+        <div class="row">
+                <div class="col-md-6">
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">Numero de boletos</span>
+                                </div>
+                                <select id="numboletos" class="form-control" required [(ngModel)]="numboletos"
+                                        name="numboletos">
+                                        <option value=1 selected>1</option>
+                                        <option value=2>2</option>
+                                        <option value=3>3</option>
+                                        <option value=4>4</option>
+                                        <option value=5>5</option>
+                                </select>
+                        </div>
+                </div>
+        </div>
+        <p class="lead" style="color: #fff;">Registro</p>
+        <hr class="my-4 bg-white">
+        <div class="row" *ngFor="let item of name_pas; let i=index">
+                <div class="col-md-12" *ngIf="numboletos>i">
+                        <p class="lead col-md-12" style="color: #fff;">Boleto {{i+1}}</p>
+                        <hr class="my-4 bg-white">
+                </div>
+
+                <div class="col-md-4">
+                        <div class="input-group mb-3" *ngIf="numboletos>i">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">Nombre</span>
+                                </div>
+                                <input type="text" class="form-control" id="nombre" [(ngModel)]="name_pas[i].name"
+                                        name="name_pas[i].name" required>
+                        </div>
+                </div>
+                <div class="col-md-4">
+                        <div class="input-group mb-3" *ngIf="numboletos>i">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">Apellido Paterno</span>
+                                </div>
+                                <input type="text" class="form-control" id="apepat" placeholder="Apellido Paterno"
+                                        [(ngModel)]="name_pas[i].apepat" name="name_pas[i].apepat" required
+                                        *ngIf="numboletos>i">
+                        </div>
+                </div>
+                <div class="col-md-4" *ngIf="numboletos>i">
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">Apellido Materno</span>
+                                </div>
+                                <input type="text" class="form-control" id="apemat" placeholder="Apellido Materno"
+                                        [(ngModel)]="name_pas[i].apemat" name="name_pas[i].apemat" required
+                                        *ngIf="numboletos>i">
+                        </div>
+                </div>
+                <div class="col-md-6" *ngIf="numboletos>i">
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">Asiento</span>
+                                </div>
+                                <select class="form-control" required [(ngModel)]="sel_seat[i]" name="sel_seat[i]">
+                                        <option [ngValue]=w *ngFor="let w of seatsAva">{{w}}</option>
+                                </select>
+                        </div>
+                </div>
+                <div class="col-md-6" *ngIf="numboletos>i">
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text">Tipo de boleto</span>
+                                </div>
+                                <select class="form-control" required [(ngModel)]="tipo_pas[i]" name="tipo_pas[i]">
+                                        <option value="normal" selected>Normal</option>
+                                        <option value="estudiante">Estudiante</option>
+                                </select>
+                        </div>
+                </div>
+                <div class="alert alert-warning alert-dismissible fade show"
+                        *ngIf="numboletos>i && tipo_pas[i]=='estudiante'" role="alert">
+                        <strong>Nota:</strong> El numero de pasajes de estudiante esta limitado a tres boletos, ademas
+                        es necesario presentar la credencial vigente antes de abordar.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+        </div>
+        <p class="lead" style="color: #fff;" *ngIf="numboletos>0">Costos</p>
+        <hr class="my-4 bg-white" *ngIf="numboletos>0">
+        <div class="col-md-12" *ngIf="numboletos>0">
+                <h6 class="lead" style="color:#fff;">Por persona: Bs. {{this.time["cost"]}}</h6>
+                <h6 class="lead" style="color:#fff;">Subtotal: Bs. {{(this.time["cost"])*numboletos}}</h6>
+                <h6 class="lead" style="color:#fff;">IVA: Bs. {{(this.time["iva"])*(this.time["cost"])*numboletos}}</h6>
+                <h6 class="lead" style="color:#fff;">Total: Bs.
+                        {{this.time.cost*numboletos+(this.time.iva*this.time.cost*numboletos)-this.descuento}}</h6>
+        </div>
+        <div class="form-row justify-content-around">
+                <button class="btn btn-info" (click)="regresar(1)">Regresar</button>
+                <button type="submit" class="btn btn-success" [disabled]="!selectForm.valid">Continuar</button>
+        </div>
+</form>
+<form class="jumbotron bg-dark" *ngIf="select_valid" (ngSubmit)="pay(payForm)" #payForm="ngForm">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="pay_valid && showalert">
+                <strong>Compra exitosa!</strong>{{this.message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+        <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="!pay_valid && showalert">
+                <strong>Error al realizar la compra!</strong>{{this.message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+        </div> -->
+        <div class="progress" style="height: 40px; margin-bottom: 1%;">
+                <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="Pago" aria-valuemin="0"
+                        aria-valuemax="100">Pago</div>
+        </div>
+        <div class="row">
+                <div class="col-md-9">
+                        <p class="lead" style="color: #fff;">Seleccione un método de pago</p>
+                        <hr class="my-4 bg-white">
+                </div>
+                <div class="col-md-3">
+                        <!-- <div *ngIf="payForm.valid">
+                                <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: flex;">
+                                        <div class="swal2-success-circular-line-left"></div>
+                                        <span class="swal2-success-line-tip"></span>
+                                        <span class="swal2-success-line-long"></span>
+                                </div>
+                        </div> -->
+                </div>
+        </div>
+        <div class="row">
+                <div class="col-sm-12">
+                        <select id="method_pay" class="form-control" [(ngModel)]="metodoPago" name="0">
+                                <option value="0">Código QR</option>
+                                <option value="1">Tarjeta de débito</option>
+                        </select>
+                </div>
+                <div class="col-md-12"></div>
+        </div>
+        <div *ngIf="metodoPago==1" class="row">
+                <div class="col-md-9">
+                        <p class="lead" style="color: #fff;">Seleccione una de las tarjetas registradas</p>
+                        <hr class="my-4 bg-white">
+                </div>
+                <div class="col-md-3">
+                        <div *ngIf="payForm.valid">
+                                <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: flex;">
+                                        <div class="swal2-success-circular-line-left"></div>
+                                        <span class="swal2-success-line-tip"></span>
+                                        <span class="swal2-success-line-long"></span>
+                                </div>
+                        </div>
+                </div>
+        </div>
+        <div class="row" *ngIf="metodoPago==1" >
+                <div class="col-sm-12">
+                        <select id="card_pay" class="form-control" required [(ngModel)]="cardpay" name="cardpay"
+                                (change)="prueba()">
+                                <option [ngValue]="w" *ngFor="let w of cards">
+                                        {{w["number"]}}, {{w["company"]}}
+                                </option>
+                        </select>
+                </div>
+                <div class="col-md-12">
+                        <hr class="my-4 bg-white">
+                        <p class="lead" style="color: #fff;">Monto Total</p>
+                        <hr class="my-4 bg-white">
+                        <h6 class="lead" *ngIf="numboletos>0" style="color:#fff;">Por persona: Bs. {{this.time["cost"]}}
+                        </h6>
+                        <h6 class="lead" *ngIf="numboletos>0" style="color:#fff;">Subtotal: Bs.
+                                {{(this.time["cost"])*numboletos}}</h6>
+                        <h6 class="lead" *ngIf="numboletos>0" style="color:#fff;">IVA: Bs.
+                                {{(this.time["iva"])*(this.time["cost"])*numboletos}}</h6>
+                        <h6 class="lead" style="color:#fff;">Descuento: Bs. {{this.descuento}}</h6>
+                        <h6 class="lead" *ngIf="numboletos>0" style="color:#fff;">Total: Bs. {{this.pay_total}}</h6>
+                </div>
+        </div>
+        <div class="row" *ngIf="metodoPago==0" >
+                <div class="col-sm-12">
+                        <div>
+                                <div align="center"><img src="assets/images/qr.jpeg" width="350" height="350"></div>
+                                
+                                <div>
+                                  <h5 class="text-justify text-center" style="color: #fff;">Ahora puedes realizar el pago de tu viaje por QR</h5>
+                                  <p class="text-justify text-center" style="color: #fff;">Ingresa a la app de tu banco preferido, si no cuentas con ella, descargala en la App Store. Luego realiza un pago por QR simple, tu app te pedira escanear el codigo QR generado por nuestro sistema y listo.</p>
+                                </div>
+                        </div>
+                </div>
+                <div class="col-md-12">
+                        <hr class="my-4 bg-white">
+                        <p class="lead" style="color: #fff;">Monto Total</p>
+                        <hr class="my-4 bg-white">
+                        <h6 class="lead" *ngIf="numboletos>0" style="color:#fff;">Por persona: Bs. {{this.time["cost"]}}
+                        </h6>
+                        <h6 class="lead" *ngIf="numboletos>0" style="color:#fff;">Subtotal: Bs.
+                                {{(this.time["cost"])*numboletos}}</h6>
+                        <h6 class="lead" *ngIf="numboletos>0" style="color:#fff;">IVA: Bs.
+                                {{(this.time["iva"])*(this.time["cost"])*numboletos}}</h6>
+                        <h6 class="lead" style="color:#fff;">Descuento: Bs. {{this.descuento}}</h6>
+                        <h6 class="lead" *ngIf="numboletos>0" style="color:#fff;">Total: Bs. {{this.pay_total}}</h6>
+                </div>
+        </div>
+        <div class="alert alert-success" role="alert" *ngIf="alert" alert-dismissible>
+                <strong>Se ha realizado la compra exitosamente. En unos momentos recibira un correo de confirmacion.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+        <div class="form-row justify-content-around">
+                <button class="btn btn-info" (click)="regresar(2)">Regresar</button>
+                <button type="submit" class="btn btn-success" [disabled]="!payForm.valid">Pagar
+                </button>
+        </div>
+
+</form>

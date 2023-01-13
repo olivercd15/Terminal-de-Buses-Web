@@ -1,0 +1,245 @@
+<button class="btn btn-outline-success col-md-4" style="margin-bottom: 1%;" (click)="toggleadd()">Agregar terminal</button>
+<div class="card-row" *ngIf="addterminaltoggle">  
+  <form class="jumbotron bg-dark">
+      <h4 class="display-5" style="color:#fff;">Nueva Terminal</h4>
+      <hr class="my-4 bg-white">
+      <div class="form-row">
+          <div class="col-md-8">
+              <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                              <span class="input-group-text">Nombre</span>
+                      </div>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="newterminal.name"
+                        [(ngModel)]="newterminal.name">
+              </div>
+          </div>
+      </div>  
+      <div class="form-row">
+          <div class="col-md-8">
+              <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                              <span class="input-group-text">Ciudad</span>
+                      </div>
+                      <input 
+                        type="text"
+                        class="form-control"
+                        name="newterminal.city"
+                        [(ngModel)]="newterminal.city">
+              </div>
+          </div>      
+      </div>
+      <div class="form-row">
+          <div class="col-md-8">
+              <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                              <span class="input-group-text">Estado</span>
+                      </div>
+                      <input 
+                        type="text"
+                        class="form-control"
+                        name="newterminal.state"
+                        [(ngModel)]="newterminal.state">
+              </div>
+            </div>
+      </div>     
+      <div class="form-row">
+          <div class="col-md-8">
+              <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                              <span class="input-group-text">Calle</span>
+                      </div>
+                      <input 
+                        type="text"
+                        class="form-control"
+                        name="newterminal.street"
+                        [(ngModel)]="newterminal.street">
+              </div>
+            </div>
+      </div>
+      <div class="form-row">
+          <div class="col-md-8">
+              <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                              <span class="input-group-text">Numero</span>
+                      </div>
+                      <input 
+                        type="text"
+                        class="form-control"
+                        name="newterminal.num"
+                        [(ngModel)]="newterminal.num">
+              </div>
+      </div>
+      </div>
+      <div class="form-row">
+          <div class="col-md-8">
+              <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                              <span class="input-group-text">Colonia</span>
+                      </div>
+                      <input 
+                        type="text"
+                        class="form-control"
+                        name="newterminal.col"
+                        [(ngModel)]="newterminal.col">
+              </div>
+      </div>
+      </div>
+      <div class="form-row">
+          <div class="col-md-8">
+              <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                              <span class="input-group-text">Telefono</span>
+                      </div>
+                      <input 
+                        type="tel"
+                        class="form-control"
+                        name="newterminal.tel"
+                        [(ngModel)]="newterminal.tel">
+              </div>
+        </div>
+      </div>
+      <div class="form-row">
+          <div class="col-md-8">
+              <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                              <span class="input-group-text">C.P.</span>
+                      </div>
+                      <input 
+                        type="text"
+                        class="form-control"
+                        name="newterminal.zip"
+                        [(ngModel)]="newterminal.zip">
+              </div>
+        </div>
+      </div>     
+      <div class="form-row">
+        <div class="col-md-4">
+          <button class="btn btn-outline-info" (click)="addterminal()">Agregar terminal</button>
+        </div>
+      </div>
+    </form>  
+      
+</div>
+<div class="card-rows">  
+  <form class="jumbotron bg-dark" *ngFor="let terminal of terminals;let i=index">
+      <h4 class="display-5" style="color:#fff;">Terminal #{{terminal["id"]}}</h4>
+      <hr class="my-4 bg-white">
+      <div class="form-row">
+          <div class="col-md-6">
+              <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                              <span class="input-group-text">Nombre</span>
+                      </div>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="terminals[i].name"
+                        [(ngModel)]="terminals[i].name"
+                        [disabled]="!this.name_edit[i]" 
+                        placeholder="">
+              </div>
+          </div>
+          <div class="col-md-4">
+            <button type="button" class="btn btn-outline-success" (click)="this.name_edit[i] = !this.name_edit[i];this.update_change[i]=true">Editar</button>
+          </div>
+        </div>  
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                          <span class="input-group-text">Ciudad</span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="terminals[i].city"
+                    [(ngModel)]="terminals[i].city"
+                    [disabled]="!this.city_edit[i]" 
+                    placeholder="">
+          </div>
+      </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                          <span class="input-group-text">Estado</span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="terminals[i].state"
+                    [(ngModel)]="terminals[i].state"
+                    [disabled]="!this.state_edit[i]" 
+                    placeholder="">
+          </div>
+      </div>
+      </div>     
+      <div class="form-row">
+          <div class="col-md-6">
+              <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                              <span class="input-group-text">Calle</span>
+                      </div>
+                      <input 
+                        type="text"
+                        class="form-control"
+                        name="terminals[i].street"
+                        [(ngModel)]="terminals[i].street"
+                        [disabled]="!this.street_edit[i]" >
+              </div>
+      </div>
+      <div class="col-md-4">
+          <button type="button" class="btn btn-outline-success" (click)="this.street_edit[i] = !this.street_edit[i];this.update_change[i]=true">Editar</button>
+        </div>
+      </div>
+      <div class="form-row">
+          <div class="col-md-6">
+              <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                              <span class="input-group-text">Num</span>
+                      </div>
+                      <input 
+                        type="text"
+                        class="form-control"
+                        name="terminals[i].num"
+                        [(ngModel)]="terminals[i].num"
+                        [disabled]="!this.num_edit[i]" >
+              </div>
+      </div>
+      <div class="col-md-4">
+          <button type="button" class="btn btn-outline-success" (click)="this.num_edit[i] = !this.num_edit[i];this.update_change[i]=true">Editar</button>
+        </div>
+      </div>
+      <div class="form-row">
+          <div class="col-md-6">
+              <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                              <span class="input-group-text">Colonia</span>
+                      </div>
+                      <input 
+                        type="text"
+                        class="form-control"
+                        name="terminals[i].col"
+                        [(ngModel)]="terminals[i].col"
+                        [disabled]="!this.col_edit[i]" >
+              </div>
+      </div>
+      <div class="col-md-4">
+          <button type="button" class="btn btn-outline-success" (click)="this.col_edit[i] = !this.col_edit[i];this.update_change[i]=true">Editar</button>
+        </div>
+      </div>     
+      <div class="row">
+          <div class="col-md-4">
+              <button class=" btn btn-danger" (click)="deleteyterminal(bus)">Eliminar</button>   
+            </div>
+          <div class="col-md-4">
+              <button class=" btn btn-success" (click)="updateterminal(terminal)" *ngIf="update_change[i]">Actualizar Datos</button>
+            </div>
+      </div> 
+    </form>  
+      
+</div>
