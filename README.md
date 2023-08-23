@@ -1,6 +1,6 @@
 # Proyecto Web Terminal de Buses - NIVEL CRACK 😎
 
-Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) versión 6.2.1.
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) versión 8.2.14.
 
 ## Ejecución de desarrollo
 
